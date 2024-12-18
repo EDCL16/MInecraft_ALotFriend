@@ -1,6 +1,6 @@
 package com.edcl.minecraftfriendmod;
 
-import com.edcl.minecraftfriendmod.item.friendscroll;
+import com.edcl.minecraftfriendmod.item.friendStone;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -31,7 +31,7 @@ public class minecraftfriendmod {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        friendscroll.register(modEventBus); // MY MOD Item
+        friendStone.register(modEventBus); // MY MOD Item
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -51,7 +51,7 @@ public class minecraftfriendmod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS)
         {
-            event.accept(friendscroll.FRIENDSCROLL);
+            event.accept(friendStone.FRIENDSCROLL);
         }
     }
 

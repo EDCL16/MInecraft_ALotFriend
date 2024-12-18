@@ -10,16 +10,16 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class friendscroll {
+public class friendStone {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, minecraftfriendmod.MODID);
 
     public static final RegistryObject<Item> FRIENDSCROLL =
-            ITEMS.register("friendscroll",
+            ITEMS.register("friendstone",
             ()-> new Item(
                     new Item.Properties().useItemDescriptionPrefix().setId(
                             ResourceKey.create(
-                                    Registries.ITEM, ResourceLocation.parse("minecraftfriendmod:friendscroll")
+                                    Registries.ITEM, ResourceLocation.parse("minecraftfriendmod:friendstone")
                             )
                     )
             ));
