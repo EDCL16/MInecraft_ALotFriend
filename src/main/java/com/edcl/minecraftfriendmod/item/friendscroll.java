@@ -1,6 +1,9 @@
 package com.edcl.minecraftfriendmod.item;
 
 import com.edcl.minecraftfriendmod.minecraftfriendmod;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -14,9 +17,15 @@ public class friendscroll {
     public static final RegistryObject<Item> FRIENDSCROLL =
             ITEMS.register("friendscroll",
             ()-> new Item(
-                    new Item.Properties()
+                    new Item.Properties().useItemDescriptionPrefix().setId(
+                            ResourceKey.create(
+                                    Registries.ITEM, ResourceLocation.parse("minecraftfriendmod:friendscroll")
+                            )
+                    )
             ));
 
+//ITEMS.register("egg", () -> new Item(new Item.Properties().useItemDescriptionPrefix().
+// setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("modid:egg")))));
     public static void register(IEventBus eventBus){
         ITEMS.register(eventBus);
     }
