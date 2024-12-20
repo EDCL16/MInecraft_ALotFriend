@@ -1,7 +1,11 @@
 package com.edcl.alotfriendmod;
 
+import com.edcl.alotfriendmod.entity.ModEntities;
+import com.edcl.alotfriendmod.item.ModItems;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
+import com.edcl.alotfriendmod.entity.client.FriendRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -26,6 +30,11 @@ public class ALotFriendMod
     public ALotFriendMod(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
+
+        ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
+
+
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
@@ -38,7 +47,9 @@ public class ALotFriendMod
 
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-
+        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.FRIEND_STONE);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -55,9 +66,7 @@ public class ALotFriendMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            EntityRenderers.register(ModEntities.FRIEND.get() , FriendRenderer::new);
         }
     }
 }
