@@ -1,0 +1,12 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#minecraft:is_overworld",
+  "spawners": [
+    {
+      "type": "alotfriendmod:friend",
+      "weight": 200000,
+      "minCount": 1,
+      "maxCount": 70
+    }
+  ]
+}

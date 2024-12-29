@@ -4,7 +4,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
@@ -12,12 +11,14 @@ public class FollowPlayerGoal extends Goal {
     private final FriendEntity friend;
     private Player targetPlayer; // 目標玩家
     private final double followSpeed;
-    private final double followRange;
+    private final double maxFollowRange;
+    private final double minFollowRange;
 
-    public FollowPlayerGoal(FriendEntity friend, double followSpeed, double followRange) {
+    public FollowPlayerGoal(FriendEntity friend) {
         this.friend = friend;
-        this.followSpeed = followSpeed;
-        this.followRange = followRange;
+        this.followSpeed = FriendEntity.MOVEMENT_SPEED;
+        this.maxFollowRange = 3f;
+        this.minFollowRange = 1f;
     }
 
     @Override
@@ -38,9 +39,11 @@ public class FollowPlayerGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        // 當玩家仍然在範圍內時繼續
-        return targetPlayer != null && targetPlayer.isAlive() &&
-                targetPlayer.distanceToSqr(friend) <= followRange * followRange;
+        boolean targetExist = targetPlayer != null;
+        boolean targetAlive = targetPlayer.isAlive();
+        boolean targetNotSoFar = targetPlayer.distanceToSqr(friend) <= maxFollowRange * maxFollowRange;   // 當玩家仍然在範圍內時繼續
+        boolean targetNotSoClose = targetPlayer.distanceToSqr(friend) >= minFollowRange * minFollowRange;
+        return targetExist && targetAlive && targetNotSoClose && targetNotSoFar;
     }
 
     @Override

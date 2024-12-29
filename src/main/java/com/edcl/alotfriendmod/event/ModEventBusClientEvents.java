@@ -13,6 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 public class ModEventBusClientEvents {
     @SubscribeEvent
     public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModModelLayers.FRIEND_LAYER, FriendModel::createBodyLayer);
+        event.registerLayerDefinition(ModModelLayers.FRIEND_LAYER, FriendModel::createMesh);
     }
 }
