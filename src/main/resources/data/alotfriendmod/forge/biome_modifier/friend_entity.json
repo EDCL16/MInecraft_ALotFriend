@@ -4,9 +4,9 @@
   "spawners": [
     {
       "type": "alotfriendmod:friend",
-      "weight": 50,
+      "weight": 200,
       "minCount": 1,
-      "maxCount": 3
+      "maxCount": 7
     }
   ]
 }

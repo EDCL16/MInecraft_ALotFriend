@@ -6,6 +6,7 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
+import java.util.Random;
 
 public class FollowPlayerGoal extends Goal {
     private final FriendEntity friend;
@@ -30,7 +31,14 @@ public class FollowPlayerGoal extends Goal {
         if (!players.isEmpty()) {
             // 找到最近的玩家
             targetPlayer = players.get(0);
-            return true;
+
+            boolean targetNotSoFar = targetPlayer.distanceToSqr(friend) <= maxFollowRange * maxFollowRange;
+
+            Random rand = new Random();
+            float randomValue = rand.nextFloat();  // 生成一個 0.0 到 1.0 之間的隨機浮點數
+            float threshold = 0.08f;
+
+            return targetNotSoFar && randomValue < threshold;
         }
 
         targetPlayer = null;

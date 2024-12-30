@@ -11,7 +11,7 @@ import java.util.List;
 public class CollectItemOnGround extends Goal {
     private final Mob mob;
     private ItemEntity targetItem; // 目標掉落物
-    private static final int SEARCH_RADIUS = 7; // 搜索範圍
+    private static final int SEARCH_RADIUS = 15; // 搜索範圍
     private double wantedX;
     private double wantedY;
     private double wantedZ;
@@ -65,17 +65,18 @@ public class CollectItemOnGround extends Goal {
 
             // 當實體靠近掉落物時，撿取掉落物
             if (distance < 1.0) {
-                System.out.println("Item collected at: " + targetItem.position());
-                targetItem.discard(); // 模擬撿取
-                targetItem = null; // 清空目標
+                if(mob instanceof  FriendEntity)
+                {
+                    FriendEntity friend = (FriendEntity)mob;
+                    friend.pickUp(targetItem);
+                }
+                targetItem = null;
             }
         }
     }
 
     @Override
     public void stop() {
-        // 重置目標
-        System.out.println("Stopping navigation.");
         targetItem = null;
     }
 }
