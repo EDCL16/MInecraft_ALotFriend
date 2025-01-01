@@ -1,3 +1,6 @@
+### 下載
+https://www.curseforge.com/minecraft/mc-mods/a-lot-friend
+
 ###  功能
 1有簡單的ai<br>
 2會自然生成在村莊附近<br>
