@@ -27,6 +27,17 @@ public class ALotFriendMod
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    public ALotFriendMod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus);
+        ModEntities.register(modEventBus);
+
+        modEventBus.addListener(this::commonSetup);
+        MinecraftForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::addCreative);
+    }
+
     public ALotFriendMod(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
